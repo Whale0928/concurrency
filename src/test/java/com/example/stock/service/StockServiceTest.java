@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class StockServiceTest {
 
     @Autowired
-    private StockService stockService;
+    private PessimisticLockStockService stockService;
 
     @Autowired
     private StockRepository stockRepository;
@@ -39,7 +39,7 @@ class StockServiceTest {
     @Test
     @DisplayName("재고를 감소 시킬 수 있다.")
     void test1() {
-        stockService.decrease(1L, 1L);
+        stockService.decreaseStock(1L, 1L);
         Stock stock = stockRepository.findById(1L).orElseThrow();
         assertEquals(99L, stock.getStock());
     }
@@ -56,7 +56,7 @@ class StockServiceTest {
             executorService.submit((
                     () -> {
                         try {
-                            stockService.decrease(1L, 1L);
+                            stockService.decreaseStock(1L, 1L);
                         } finally {
                             countDownLatch.countDown();
                         }
