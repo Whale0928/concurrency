@@ -16,6 +16,8 @@ public class Stock {
     private Long productId;
     private Long stock;
 
+    @Version
+    private Long version;
     public Stock(Long productId, Long stock) {
         this.productId = productId;
         this.stock = stock;
