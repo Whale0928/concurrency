@@ -1,5 +1,17 @@
-# stock
+목차
+=================
+1. [stock - 재고 동시성](#stock---재고-동시성)
+   - [Synchronized ( 동기화 )](#synchronized--동기화-)
+   - [mysql을 이용한 방법( database )](#mysql을-이용한-방법-database-)
+      - [Pessimistic Lock ( 비관적 락)](#pessimistic-lock--비관적-락)
+      - [Optimistic Lock ( 낙관적 락 )](#optimistic-lock--낙관적-락-)
+      - [Named Lock](#named-lock)
+   - [Redis 를 이용한 방법 ( 외부 서버 )](#redis-를-이용한-방법--외부-서버-)
+      - [Lettuce](#lettuce)
+      - [Redisson](#redisson)
 
+
+# stock - 재고 동시성
 ### 재고관리 동시성 문제 해결 프로젝트
 
 - 동시에 100명이 제품을 구매한다면?
@@ -15,7 +27,8 @@
 시스템은 두 건의 구매가 모두 성공했다고 판단할 수 있다.
 
 그러나 실제로는 재고가 한 개만 있었기 때문에 이는 재고 관리에 오류를 초래한다.
-이러한 문제를 해결하기 위해 동기화, 데이터베이스 잠금, Redis 잠금과 같은 다양한 동시성 제어 방법이 사용된다.
+이러한 문제를 해결하기 위해 
+동기화, 데이터베이스 잠금, Redis 잠금과 같은 다양한 동시성 제어 방법이 사용된다.
 ```
 ----
 
@@ -77,3 +90,20 @@ where version = 1;
 #### Redisson
 - pub-sub (publish-subscribe)기반으로 Lock 제공
 - Thread 1 의 점유가 끈나면 Thread 2에 점유하라는 요청을 보낸다.
+
+---
+
+## Mysql vs Redis
+
+- 각자의 장단점이 존재한다. 
+
+Mysql
+- 기존에 사용 중인 MySql에서 어플리케이션 코드를 활용해 구현가능한다
+- 적당한 수준의 트래픽은 감당 가능하다.
+- Redis보다 성능 면에서는 뒤 쳐진다.
+
+Reids
+- 초기 구축 비용이 발생한다. 
+- 관리 비용이 발생한다.
+- Mysql 보다 성능이 좋다
+- 
