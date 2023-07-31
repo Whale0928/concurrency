@@ -40,3 +40,8 @@ where version = 1;
 - 이름을 가진 metadata locking. 
 - 이름을 가진 lock 을 획득한 후 해제할때까지 다른 세션은 이 lock 을 획득할 수 없도록 한다. 
 - 주의할점으로는 transaction 이 종료될 때 lock 이 자동으로 해제되지 않고. 별도의 명령어로 해제를 수행해주거나 선점시간이 끝나야한다.
+
+
+----
+
+### Redis 를 이용한 방법 ( extra server )
