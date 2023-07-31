@@ -1,3 +1,4 @@
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.2'
@@ -22,15 +23,21 @@ repositories {
 }
 
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'mysql:mysql-connector-java:8.0.32'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     //redis
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    //redisson
+    implementation group: 'org.redisson', name: 'redisson-spring-boot-starter', version: '3.23.2'
 }
 
 tasks.named('test') {
